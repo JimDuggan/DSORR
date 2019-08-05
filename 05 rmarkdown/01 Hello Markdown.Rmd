@@ -1,0 +1,21 @@
+---
+title: "01 Hello Markdown"
+output:
+  pdf_document: default
+  html_document: default
+---
+This is a paragraph in an R Markdown document.
+
+The data give the speed (*mph*) of cars and the distances (feet) taken to stop. Note that the data were recorded in the 1920s.
+
+Below is a code chunk.
+
+
+```{r}
+fit <- lm(dist~speed,data=cars)
+b <- coef(fit)
+plot(cars)
+abline(fit)
+```
+
+The slope of the regression line is `r b[2]`.
