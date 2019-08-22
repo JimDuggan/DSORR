@@ -1,0 +1,49 @@
+---
+  title: 'Part 1: R Foundations - Vectors'
+author: "Jim Duggan"
+output:
+  beamer_presentation: default
+ioslides_presentation: default
+widescreen: yes
+toc: true
+---
+  
+## Two column test
+<div class="columns-2">
+  - This is the first point...
+- Bullet 2
+- Bullet 3
+
+
+```{r, echo=F, out.width='60%', fig.cap='Test',fig.align='right'}
+knitr::include_graphics("images/01 R.png")
+```
+</div>
+  
+  
+  ## Slide with Bullets
+  ```{r, echo=F, fig.cap='Test'}
+knitr::include_graphics("images/01 R.png")
+```
+
+## Slide with Equations
+
+$$\begin{array}{ccc}
+x_{11} & x_{12} & x_{13}\\
+x_{21} & x_{22} & x_{23}\\
+\end{array}
+$$
+  
+  
+  ## Slide with R Output
+  
+  ```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
