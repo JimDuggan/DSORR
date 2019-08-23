@@ -126,7 +126,7 @@ typeof(v2)
 ```
   
 ## Challenge 1.1
-Determine the tpes for each of the following vectors
+Determine the types for each of the following vectors
 ```{r,echo=T}
 v1 <- c(1L, T, FALSE)
 v2 <- c(1L, T, FALSE, 2)

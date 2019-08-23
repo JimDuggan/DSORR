@@ -1,6 +1,6 @@
 ---
 title: 'Part 2: Exploratory Data Analysis'
-author: "(a) ggplot2"
+author: "(b) dplyr"
 output:
   beamer_presentation: default
   ioslides_presentation: default
