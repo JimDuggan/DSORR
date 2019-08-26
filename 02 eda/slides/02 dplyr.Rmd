@@ -13,269 +13,160 @@ library(ggplot2)
 library(dplyr)
 ```
 
-## Data Exploration
+## Overview
 
-“Data exploration is the art of looking at your data, rapidly generating hypotheses, quickly testing them, then repeating again and again and again.” (Wickham and Grolemund 2017).
+- Visualisation is an important tool for insight generation, but it’s rare that you get the data in exactly the right form you need” (Wickham and Grolemund 2017)
+  + Create new variables
+  + Create summaries
+  + Order data
+- dplyr package is designed for data transformation
 
-```{r, echo=F,out.width='100%',fig.cap='Exploring Data'}
- knitr::include_graphics("images/01 DE.png")
+## dplyr
+
+- All verbs (functions) work similarly
+- The first argument is a data frame/tibble
+- The subsequent arguments decide what to do with the data frame
+- The result is a data frame (supports chaining of steps)
+
+```{r, echo=F,out.width='100%',fig.cap='Key dplyr functions'}
+ knitr::include_graphics("images/06 dplyr.png")
 ```
 
-
-## Data visualisation with **ggplot2**
-
-“The simple graph has brought more information to the data analyst’s mind that any other device.” – John Tukey 
-
-```{r,echo=T}
-d <- ggplot2::mpg  # get a copy of mpg
-glimpse(d)  # show structure and some data
+## Sample Data set ggplot2::mpg
+```{r}
+glimpse(mpg)
 ```
 
-## Fuel Economy Data Set (ggplot2::mpg)
+## (1) **filter()**
+- Subset observations based on their values. 
+- First argument the name of the data frame
+- Subsequent arguments are expressions that filter the data frame
+- Only includes rows that have no missing values
 
-This dataset contains a subset of the fuel economy data that the EPA makes available on http://fueleconomy.gov. It contains only models which had a new release every year between 1999 and 2008 - this was used as a proxy for the popularity of the car.
-
-|**manufacturer**| car manufacturer| **drv** | drive type |
-|:------|:----------|:-----------|:-----------|
-|**model**| model name| **cty** | city miles per gallon |
-|**displ**| engine disp (l)| **hwy** | highway miles per gallon |
-|**year**| year of make| **fl** | fuel type |
-|**model**| model name| **cty** | city miles per gallon |
-|**cyl**| number of cylinders| **class** | "type" of car |
-|**trans**| type of transm.|  | |
-
-## Exploring Data
-Generate a first graph to help answer the following question
-
-- Do cars with big engines use more fuel than cars with small engines
-- What might the relationship between engine size and fuel efficiency look like?
-  + Positive or negative?
-  + Linear or non-linear?
-- Variable (scatter plot)
-  + **displ**, a car engine size in litres (x)
-  + **hwy**, a car's fuel efficiency on highway - (y)
-
-## Plotting with ggplot2
-
-```{r,echo=T,fig.width=5, fig.height=3}
-ggplot(data = d) +   # specify the source tibble
-  geom_point(mapping=aes(x=displ,  # map x, y vars
-                         y=hwy))
+```{r, echo=T}
+filter(mpg,manufacturer=="audi",year==1999,model=="a4")
 ```
 
-## Adding a linear model
+## Cars with highest mpg, lowest mpg?
 
-```{r,echo=T,fig.width=5, fig.height=3}
-ggplot(data = d,aes(x=displ, y=hwy)) +  
-  geom_point() +
-  geom_smooth(method = "lm")
-```
-
-## Interpreting the plot
-- The plot shows a negative relationship between engine size (displ) and fuel efficiency (hwy)
-- Cars with big engines use more fuel
-- Does this confirm or refute your hypothesis about fuel efficiency and engine size?
-```{r,echo=F,fig.width=4, fig.height=2.5}
-ggplot(data = d,aes(x=displ, y=hwy)) +  
-  geom_point() +
-  geom_smooth(method = "lm")
+```{r, echo=T}
+filter(mpg,hwy==max(hwy))
+filter(mpg,hwy==min(hwy))
 ```
 
 ## Challenge 2.1
-- Explore the hypothesis that city driving is less fuel efficient that highway driving
-- Use ggplot to present the points on the same graph, and colour each data set differently
-- Does the data confirm or refute your initial hypothesis?
 
-```{r,echo=T,fig.width=3, fig.height=1.5}
-ggplot(data = d) +  
-  geom_point(mapping=aes(x=displ,  
-                         y=hwy),colour="blue")
+- List the cars with an average city mpg greater than the median.
+- Show the cars with the maximum displacement
+
+## (2) **arrange()**
+- Changes the order of rows. 
+- Takes a data frame and a set of column names to order by
+
+```{r, echo=T}
+arrange(mpg,displ)
 ```
 
-## Aesthetic Mappings
-- A third variable can be added to a 2-D plot by mapping it to an aesthetic.
-- An aesthetic is a visual property of the plot’s objects.
-- An aesthetic’s level could be colour, size or shape
+## Show in descending order
 
-
-```{r,echo=T}
-unique(d$class)
+```{r, echo=T}
+arrange(mpg,desc(displ))
 ```
 
-## In ggplot2 - Adding the third variable
-```{r,echo=T,fig.width=7, fig.height=4}
-ggplot(data=d)+
-  geom_point(aes(x=displ,y=hwy,colour=class))
+## Add an extra sort column
+
+```{r, echo=T}
+arrange(mpg,desc(year),desc(displ))
 ```
 
-## Facets
-- Another way to add categorical variables is to split a plot into facets, subplots that display one subset of the data.
-- To facet your plot by a single variable, use facet_wrap(), with ~ followed by the variable name
-- To facet on the combination of two variables, used facet_grid()
+## (3) **select()**
+- It is not uncommon to get datasets with hundreds, or even thousands, of variables
+- A challenge is to narrow down on the variables of you’re interested in
+- select() allows you to rapidly zoom in on a useful subset using operations based on the variable names
 
-## Facet Example 1
-```{r,echo=T,fig.width=7, fig.height=4}
-ggplot(data=d)+
-  geom_point(aes(x=displ,y=hwy))+
-  facet_wrap(~class)
+```{r, echo=T}
+select(mpg,model,year,displ, cty, hwy)
 ```
 
-## Facet Example 2
-```{r,echo=T,fig.width=7, fig.height=4}
-ggplot(data=d)+
-  geom_point(aes(x=displ,y=hwy,colour=class))+
-  facet_wrap(~manufacturer)
+## Special Function with select
+```{r, echo=F,out.width='100%',fig.cap='Specical functions with select'}
+ knitr::include_graphics("images/07 select.png")
 ```
 
-## Facet Grid Example
-```{r,echo=T,fig.width=7, fig.height=4}
-ggplot(data=d)+
-  geom_point(aes(x=displ,y=hwy))+
-  facet_grid(drv~cyl)
+## (4) **mutate()**
+- It is often useful to add new columns that are functions of existing columns
+- mutate() always adds new columns at the end of your data set.
+
+```{r, echo=T}
+sml <- select(mpg,model,displ,cty)
+sml <- mutate(sml,Category=ifelse(cty>mean(cty),"AboveAvr","BelowAvr"))
+sml
 ```
 
-## Geoms
-- A geom is a geometrical object that a plot uses to represent data
-- Bar charts use bar geoms, line charts use line geoms, and scatter plots use the point geom.
-- To change the geom in your plot, simply change the geom function that is added to the ggplot call.
-
-## Same data - geom 1
-```{r,echo=T,fig.width=7, fig.height=4}
-ggplot(data=d)+
-  geom_smooth(aes(x=displ,y=hwy))
+## Useful creation functions
+- There are many functions for creating new variables that can be used with mutate()
+- The key property is that the function must be vectorised:
+  + It must take a vector of values as input, and,
+  + Return a vector with the same number of values as output
+```{r, echo=F,out.width='80%',fig.cap='Creation functions with mutate()'}
+ knitr::include_graphics("images/09 Mutate.png")
 ```
 
-## Same data - geom 2
-```{r,echo=T,fig.width=7, fig.height=4}
-ggplot(data=d)+
-  geom_point(aes(x=displ,y=hwy))
+## (5) **summarise()**
+- The last key verb is summarise()
+- It collapses a data frame into a single row
+- Not very useful unless paired with group_by()
+- Very useful to combine with the pipe operator %>%
+- The pipe %>% comes from the magrittr package (Stefan Milton Bache)
+- Helps to write code that is easier to read and understand
+  + x %>% f(y) turns into f(x, y)
+```{r, echo=T}
+mpg %>% select(model,displ,cty) %>% slice(1:2)
 ```
 
-## Using different data sources
-```{r,echo=T,fig.width=5, fig.height=2}
-ggplot(data=d,aes(x=displ,y=hwy,colour=class))+
-  geom_point()+
-  geom_smooth(data=filter(d,class=="subcompact"),
-              method="lm",se = F)+
-  geom_smooth(data=filter(d,class=="2seater"),
-              method="lm",se = F)
+## The function **group_by()**
+- Most summary data operations are useful done on groups defined by variables in the the dataset.
+- The group_by function takes an existing tbl and converts it into a grouped tbl where operations can then performed "by group”.
+
+```{r, echo=T}
+gr <- group_by(mpg,year)
+agg <- summarise(gr,AverageCty=mean(cty))
+agg
 ```
 
+## Using %>%
 
-## Sample plot geoms
-.
-
-```{r, echo=F,out.width='100%',fig.cap='Sample geoms'}
- knitr::include_graphics("images/02 Geoms.png")
+```{r, echo=T}
+mpg %>% group_by(manufacturer)            %>% 
+        summarise(AvrCty=mean(cty),N=n()) %>%
+        arrange(desc(AvrCty))             %>%
+        slice(1:5)
 ```
 
-## Diamonds Data Set
-A dataset containing the prices and other attributes of almost 54,000 diamonds
-
-```{r,echo=F}
-knitr::kable(
-  slice(ggplot2::diamonds,1:10),
-  caption="Selected sample from diamonds data set"
-)
+## Overall idea
+```{r, echo=F,out.width='100%',fig.cap='Overall summary process'}
+ knitr::include_graphics("images/11 Overall.png")
 ```
 
-
-## Explanation of Variables
-
-```{r, echo=F,out.width='100%',fig.cap='Diamonds attributes'}
- knitr::include_graphics("images/03 Diamonds.png")
+## Useful Summary Functions
+```{r, echo=F,out.width='100%',fig.cap='Summary Functions'}
+ knitr::include_graphics("images/12 Functions.png")
 ```
 
-
-## Diamonds summary
-```{r, echo=F,out.width='100%',fig.cap='Data set summary'}
- knitr::include_graphics("images/04 Summary.png")
+## The package nycflights13
+```{r, echo=T}
+glimpse(nycflights13::flights)
 ```
 
-## Statistical Transformations
-- Many graphs, like scatterplots, plot the raw values of the dataset
-
-- However, other graphs (e.g. bar charts) calculate new values to plot
-  + Bar charts, histograms and frequency polygons bin your data and plot bin counts, the number of points that fall in each bin
-  + Smoothers fit a model to your data and the plot predictions from the model
-  + Boxplots compute a robust summary of the distribution and display a specially formatted box
-
-## Bar Chart
-
-```{r,echo=T,fig.width=7, fig.height=5}
-ggplot(data=diamonds)+
-  geom_bar(aes(x=cut))
+## Challenge 2.2 | nycflights13::flights
+Generate the following graph. Use the variable **dep_delay**. The variable **origin** indicates the departure airport.
+```{r, echo=T}
+unique(nycflights13::flights$origin)
 ```
 
-## Bar Chart: Adding information with fill
-
-```{r,echo=T,fig.width=7, fig.height=5}
-ggplot(data=diamonds)+
-  geom_bar(aes(x=cut,fill=clarity))
+```{r, echo=F,out.width='75%',fig.cap='Summary of flights data'}
+ knitr::include_graphics("images/08 Flights.png")
 ```
-
-## Bar Chart: Normalising Plot
-
-```{r,echo=T,fig.width=7, fig.height=5}
-ggplot(data=diamonds)+
-  geom_bar(aes(x=cut,fill=clarity),position="fill")
-```
-
-## Bar Chart: side-by-side
-
-```{r,echo=T,fig.width=7, fig.height=5}
-ggplot(data=diamonds)+
-  geom_bar(aes(x=cut,fill=clarity),position="dodge")
-```
-
-## Additional Adjustment
-- Recall our first scatterplot
-- 126 points displayed, yet there are 234 observations
-- Many points can overlap, so it makes it hard to see where the mass of data is
-- Are all points spread equally, or is there one special combination that contains 129 values?
-- “jitter” adds random noise to each point
-
-## Using jitter
-
-```{r,echo=T,fig.width=6, fig.height=4}
-ggplot(data=mpg)+
-  geom_point(aes(x=displ,y=hwy),
-           colour="blue", position="jitter")
-```
-
-## Histogram
-
-```{r,echo=T,fig.width=6, fig.height=4}
-ggplot(data=diamonds,aes(x=price))+
-  geom_histogram(binwidth = 500)
-```
-
-
-## Boxplot
-- Display the distribution of a continuous variable broken down by a categorical variable
-- Box that stretches from the 25th to 75th percentile a distance known as the interquartile range (IRQ)
-- Median in the middle of box
-- Points outside more that 1.5 times the IQR from either edge of the box are displayed (outliers)
-- Whisker extends to the farthest non-outlier point in the distribution 
-
-## Boxplot Example
-
-```{r,echo=T,fig.width=6, fig.height=4}
-ggplot(data=mpg,aes(x=class,y=hwy))+
-  geom_boxplot()
-```
-
-## Summary
-<div class="columns-2">
-- The ggplot2 approach can be summarised by a template
-- It can take seven parameters, but usually not all need to be applied (defaults used)
-- These seven parameters compose the grammar of graphics
-
-```{r, echo=F,out.width='50%',fig.cap='Layered Grammar of Graphics'}
- knitr::include_graphics("images/05 Layered.png")
-```
-
-</div>
 
 ## Test Slide with Plot
 

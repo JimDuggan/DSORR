@@ -160,3 +160,28 @@ t
 - Functions and Functionals
 - Data Frames & Tibbles
 
+## Objects in R
+- “Everything that exists in R is an object”. Chambers (2008)
+- However, while everything is an object, not everything is object-oriented (Wickham 2019)
+- Base objects come from S, and were developed before anyone thought that S might need an OOP system. **typeof()** provides information on the base object, and **sloop::otype()**
+
+```{r, echo=F,out.width='100%',fig.cap='Objects in R'}
+ knitr::include_graphics("images/08 Objects.png")
+```
+
+## Examples
+```{r,echo=T}
+typeof(1:10)
+sloop::otype(1:10)
+mod <- lm(eruptions ~ waiting, data=faithful) 
+typeof(mod)
+sloop::otype(mod)
+class(mod)
+```
+
+## Test Slide with Plot
+
+```{r}
+plot(faithful)
+```
+

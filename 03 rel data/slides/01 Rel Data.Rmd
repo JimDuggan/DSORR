@@ -1,0 +1,143 @@
+---
+title: 'Part 3: Relational Data, Preparing Data and Linear Models'
+author: "(a) Relational Data with dplyr"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+  widescreen: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+library(dplyr)
+```
+
+## Relational Data with dplyr
+
+- Typically, data analysis involves many tables of data that must be combined to answer questions
+- Collectively, multiple tables of data are called relational data
+- Relations are always defined between a pair of tables
+- See tibbles **x** and **y**
+
+```{r,echo=F,fig.width=5, fig.height=3}
+x = tibble(key=c(1,2,3), 
+           val_x = c("x1","x2","x3"))
+x
+y = tibble(key=c(1,2,4), 
+           val_y = c("y1","y2","y3"))
+y
+
+```
+
+## Keys
+- The variables used to connect each pair of tables are called keys
+- A key is a variable (or set of variables) that uniquely identifies an observation
+- There are two types of keys:
+  + A primary key uniquely identifies an observation in its own table
+  + A foreign key uniquely identifies an observation in another table.
+
+```{r, echo=F,out.width='65%',fig.cap='Keys and Relations in flights tables'}
+ knitr::include_graphics("images/01 Keys.png")
+```
+
+## Mutating Joins
+- Allows you to combine variables from two tables
+- First matches observations by their keys, and then copies across variables from one table to another
+- Similar to mutate(), the join functions add variables to the right
+- Types
+  + Inner Join
+  + Left Join
+  + Right Join
+  + Full Join
+
+## Inner Joins
+- Matches pairs of observations when their keys are equal
+- Unmatched rows are not included in the result
+
+```{r,echo=T,fig.width=5, fig.height=3}
+inner_join(x,y)
+```
+
+```{r, echo=F,out.width='40%',fig.cap='Tables x and y'}
+ knitr::include_graphics("images/02 Base Tables.png")
+```
+
+## Left Join
+A left join keeps all observations in x
+
+```{r,echo=T,fig.width=5, fig.height=3}
+left_join(x,y)
+```
+
+```{r, echo=F,out.width='40%',fig.cap='Tables x and y'}
+ knitr::include_graphics("images/02 Base Tables.png")
+```
+
+
+## Right Join
+A right join keeps all observations in y
+
+```{r,echo=T,fig.width=5, fig.height=3}
+right_join(x,y)
+```
+
+```{r, echo=F,out.width='40%',fig.cap='Tables x and y'}
+ knitr::include_graphics("images/02 Base Tables.png")
+```
+
+## Full Join
+A full join keeps all observations in x and y
+
+```{r,echo=T,fig.width=5, fig.height=3}
+full_join(x,y)
+```
+
+```{r, echo=F,out.width='40%',fig.cap='Tables x and y'}
+ knitr::include_graphics("images/02 Base Tables.png")
+```
+
+## Filtering Joins
+
+Match observations in the same way as mutating joins, but affect the observations, not the variables. Two types:
+
+- semi_join(x,y) keeps all observations in x that have a match in y
+- anti_join(x,y), drops all observations in x that have a match in y.
+
+
+## Semi Joins
+Keeps all observations in x that have a match in y
+
+```{r,echo=T,fig.width=5, fig.height=3}
+semi_join(x,y)
+```
+
+```{r, echo=F,out.width='40%',fig.cap='Tables x and y'}
+ knitr::include_graphics("images/02 Base Tables.png")
+```
+
+## Anti Joins
+Drops all observations in x that have a match in y.
+
+```{r,echo=T,fig.width=5, fig.height=3}
+anti_join(x,y)
+```
+
+```{r, echo=F,out.width='40%',fig.cap='Tables x and y'}
+ knitr::include_graphics("images/02 Base Tables.png")
+```
+
+## Challenge 3.1
+- Filter out incomplete flights from the dataset
+- Join the flights data to the weather data
+- Filter out missing temperature values
+- Plot the relationship between temperatures and departure delays, facet by origin
+- Use a sample of 10000 for the plot, with seed 99.
+
+## Test Slide with Plot
+
+```{r}
+plot(faithful)
+```
+
+
