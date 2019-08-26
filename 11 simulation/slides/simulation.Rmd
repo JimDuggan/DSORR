@@ -1,0 +1,37 @@
+---
+title: 'Part 3: Relational Data, Preparing Data and Linear Models'
+author: "(c) Linear Model - Energy Example"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+  widescreen: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(readxl)
+library(lubridate)
+```
+
+## Using the tidyverse to support simulation
+
+- Tidying input data
+- Analysing simulation output
+- Running sensitivity analysis
+
+```{r, echo=F,out.width='80%'}
+ knitr::include_graphics("images/01 Title.png")
+```
+
+
+## Test Slide with Plot
+
+```{r}
+plot(faithful)
+```
+
+
+

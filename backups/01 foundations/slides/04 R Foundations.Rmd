@@ -1,0 +1,187 @@
+---
+title: 'Part 1: R Foundations'
+author: "(d) Data Frames and Tibbles"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+  widescreen: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+library(dplyr)
+```
+
+
+## Recap - R Data Types
+ 
+|| Homogenous| Heterogenous |
+|:------|:----------|:-----------|
+|1d | Atomic Vector|List|
+|2d | Matrix|**Data Frame/Tibble**|
+|nd | Array| |
+
+- The most common way of storing data in R
+- Under the hood, a data frame is a list of equal-length vectors
+- A two-dimensional structure, it shares properties of both a list and a matrix
+
+
+
+## Creating a data frame
+
+```{r,echo=T}
+d <- data.frame(x=1:3, y = LETTERS[1:3], z = letters[1:3])
+d
+d$x
+d$y
+d$z
+```
+
+## summary function with data frames
+
+```{r,echo=T}
+d <- data.frame(x=1:3, y = LETTERS[1:3], 
+                z = letters[1:3])
+d
+summary(d)
+```
+
+## mtcars data frame
+A data frame with 32 observations on 11 variables.
+
+- **mpg**	Miles/(US) gallon	
+- **cyl**	Number of cylinders	
+- **disp**	Displacement (cu.in.)	
+- **hp**	Gross horsepower	
+- **drat**	Rear axle ratio	
+- **wt**	Weight (1000 lbs)	
+- **qsec**	1/4 mile time	
+- **vs**	V/S	
+- **am**	Transmission (0 = automatic, 1 = manual)	
+- **gear**	Number of forward gears	
+- **carb**	Number of carburetors
+
+## mtcars sample data
+
+```{r,echo=T}
+knitr::kable(mtcars[1:10,1:6])
+```
+
+## mtcars using **str()**
+```{r,echo=T}
+str(mtcars)
+```
+## head() and tail() functions
+```{r,echo=T}
+head(mtcars[,1:6])
+tail(mtcars[,1:6])
+```
+
+## Subsetting rows
+```{r,echo=T}
+mtcars[mtcars$gear == 5,]
+```
+
+## Accessing rows/columns
+```{r,echo=T}
+mtcars[1:10,1:6]
+```
+
+## Filtering rows and columns
+```{r,echo=T}
+mtcars[mtcars$cyl == 6,c("mpg","cyl")]
+```
+
+## Challenge 1.5
+- List all the cars that have an **mpg** greater than the average
+- List the car(s) with the greatest displacement (**disp**)
+
+## Adding new columns to a data frame
+- Often the initial data set may not contain sufficient information for analysis
+- Adding new variables (columns) is an important feature to have
+- Data frames support this: columns can be combined or new information used
+
+```{r,echo=T}
+mtcars$name <- rownames(mtcars)
+mtcars[1:5,-(1:8)]
+```
+
+## Challenge 1.6
+Create a new column on mtcars that contains kilometers per gallon. 
+
+## Missing data - complete.cases()
+
+```{r,echo=T}
+d <- data.frame(x=1:3, y = LETTERS[1:3], 
+                z = letters[1:3])
+d[2,3] <- NA
+d
+complete.cases(d)
+d[complete.cases(d),]
+```
+
+## The tibble
+- Tibbles are data frames, but they tweak some older behaviours to make life a little easier
+- One of the unifying features of the tidyverse
+- To coerce a data frame to a tibble, use as_tibble()
+- A tibble can be created from individual vectors using tibble()
+
+
+```{r,echo=T}
+t <- tibble(x=1:3, y = LETTERS[1:3], z = letters[1:3])
+t
+```
+
+## Tibble abbreviations
+
+```{r,echo=T}
+t
+```
+
+|Abbreviation| Data Type |
+|:------|:--------|
+|int | integers |
+|dbl | double (numeric)|
+|chr | character vectors| 
+|dttm | date-times| 
+|fctr | categorical| 
+|date | dates |
+
+## Summary - Part 1: R Foundations
+|| Homogenous| Heterogenous |
+|:------|:----------|:-----------|
+|1d | Atomic Vector|List|
+|2d | *Matrix*|Data Frame/Tibble|
+|nd | *Array*| |
+
+- Atomic Vectors
+- Lists
+- Functions and Functionals
+- Data Frames & Tibbles
+
+## Objects in R
+- “Everything that exists in R is an object”. Chambers (2008)
+- However, while everything is an object, not everything is object-oriented (Wickham 2019)
+- Base objects come from S, and were developed before anyone thought that S might need an OOP system. **typeof()** provides information on the base object, and **sloop::otype()**
+
+```{r, echo=F,out.width='100%',fig.cap='Objects in R'}
+ knitr::include_graphics("images/08 Objects.png")
+```
+
+## Examples
+```{r,echo=T}
+typeof(1:10)
+sloop::otype(1:10)
+mod <- lm(eruptions ~ waiting, data=faithful) 
+typeof(mod)
+sloop::otype(mod)
+class(mod)
+```
+
+## Test Slide with Plot
+
+```{r}
+plot(faithful)
+```
+
