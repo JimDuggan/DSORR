@@ -1,6 +1,6 @@
 ---
-title: 'Part 3: Relational Data, Preparing Data and Linear Models'
-author: "(a) Relational Data with dplyr"
+title: '7. Linking data tables in R'
+author: "Join functions from dplyr"
 output:
   beamer_presentation: default
   ioslides_presentation: default

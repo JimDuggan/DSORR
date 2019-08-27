@@ -1,5 +1,5 @@
 ---
-title: 'Part 1: R Foundations'
+title: '1. R Foundations'
 author: "(a) Atomic Vectors"
 output:
   beamer_presentation: default
@@ -274,7 +274,7 @@ x[!is.na(x)] # Exclude all NAs from result
 
 ## Test Slide with Plot
 
-```{r}
+```{r,echo=F}
 plot(faithful)
 ```
 

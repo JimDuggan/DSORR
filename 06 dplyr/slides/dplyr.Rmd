@@ -1,6 +1,6 @@
 ---
-title: 'Part 2: Exploratory Data Analysis'
-author: "(b) dplyr"
+title: '6. Exploratory Data Analysis'
+author: "Analysis of Data  with dplyr"
 output:
   beamer_presentation: default
   ioslides_presentation: default

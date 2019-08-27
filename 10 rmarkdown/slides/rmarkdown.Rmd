@@ -1,0 +1,116 @@
+---
+title: '10. R Markdown'
+author: "Communicating Results"
+output:
+  beamer_presentation: default
+  ioslides_presentation: default
+  widescreen: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+```
+
+## R Markdown
+- R Markdown provides a unified authoring framework for data science, combining your code, results and prose commentary
+- R Markdown documents are fully reproducible and support many output formats (pdfs, slideshows, and more).
+- Course slides developed with RMarkdown, see [https://github.com/JimDuggan/DSORR](https://github.com/JimDuggan/DSORR)
+```{r, echo=F,out.width='100%'}
+ knitr::include_graphics("images/01 DE.png")
+```
+
+
+
+## Why use R Markdown?
+- For communicating to decision makers, who want to focus on conclusions, not the code behind the analysis.
+- For collaborating with other data scientists, who are interested in your conclusions, and how you reached them
+- As an environment in which to do data science, where you capture not only what you did, but what you were thinking
+
+## R Markdown Elements
+- An (optional) YAML header surrounded by ---
+- Chunks of R Code, surrounded by ```
+- Text mixed with simple text formatting
+
+## R Markdown Example
+
+```{r, echo=F,out.width='100%'}
+ knitr::include_graphics("images/02 Example.png")
+```
+
+## "knit" to HTML
+
+```{r, echo=F,out.width='80%'}
+ knitr::include_graphics("images/03 Example.png")
+```
+
+## "knit" to PDF
+
+```{r, echo=F,out.width='80%'}
+ knitr::include_graphics("images/04 Example.png")
+```
+
+## Text formatting with Markdown
+- Text Formatting
+  + \*italic\* 
+  + \*\*bold\*\*
+  + \`code\`
+- Headings
+  + \# First Level header
+  + \#\# Second Level header
+  + \#\#\# Third Level header
+- Lists
+  + \* Bulleted list item 1
+  + 1 Numbered list item 1
+
+## Inserting Chunks
+This table summarizes what types of output each option suppresses…
+```{r, echo=F,out.width='100%'}
+ knitr::include_graphics("images/05 Chunks.png")
+```
+
+
+## Creating a Table
+
+```{r, echo=F,out.width='100%'}
+ knitr::include_graphics("images/06 Table.png")
+```
+
+## YAML Header
+
+- Yet Another Markup Language”
+- Useful features
+  + Parameters
+  + Bibliographies
+
+## YAML Example
+
+```{r, echo=F,out.width='100%'}
+ knitr::include_graphics("images/07 YAML.png")
+```
+
+## Sample Output
+
+```{r, echo=F,out.width='100%'}
+ knitr::include_graphics("images/08 ParameterTest.png")
+```
+
+## Presentations
+```{r, echo=F,out.width='100%'}
+ knitr::include_graphics("images/09 Presentation Code.png")
+```
+
+## Output
+```{r, echo=F,out.width='100%'}
+ knitr::include_graphics("images/10 Slide Output.png")
+```
+
+
+
+## Test Slide with Plot
+
+```{r,echo=F}
+plot(faithful)
+```
+
+

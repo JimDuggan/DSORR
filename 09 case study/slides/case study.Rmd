@@ -1,6 +1,6 @@
 ---
-title: 'Part 3: Relational Data, Preparing Data and Linear Models'
-author: "(c) Linear Model - Energy Example"
+title: '9. Linking Data and Linear Modelling'
+author: "An Energy Case Study"
 output:
   beamer_presentation: default
   ioslides_presentation: default
@@ -18,7 +18,7 @@ library(lubridate)
 
 ## Transmission System (2017)
 
-```{r, echo=F,out.width='100%',fig.cap='Electricity Transmission System'}
+```{r, echo=F,out.width='100%'}
  knitr::include_graphics("images/01 Transmission.png")
 ```
 

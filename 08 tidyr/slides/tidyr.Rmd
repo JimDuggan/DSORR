@@ -1,6 +1,6 @@
 ---
-title: 'Part 3: Relational Data, Preparing Data and Linear Models'
-author: "(b) tidyr package"
+title: "8. Preparing Data for Analysis"
+author: "The tidyr Package"
 output:
   beamer_presentation: default
   ioslides_presentation: default

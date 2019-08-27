@@ -1,6 +1,6 @@
 ---
-title: 'Part 3: Relational Data, Preparing Data and Linear Models'
-author: "(c) Linear Model - Energy Example"
+title: '11. Using R to Support Simulation Input and Output Analysis'
+author: "A Case Study with System Dynamics"
 output:
   beamer_presentation: default
   ioslides_presentation: default

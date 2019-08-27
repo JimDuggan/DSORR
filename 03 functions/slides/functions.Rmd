@@ -1,6 +1,6 @@
 ---
-title: 'Part 1: R Foundations'
-author: "(c) Functions"
+title: '3. R Foundations'
+author: "Functions"
 output:
   beamer_presentation: default
   ioslides_presentation: default

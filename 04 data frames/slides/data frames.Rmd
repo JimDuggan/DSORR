@@ -1,6 +1,6 @@
 ---
-title: 'Part 1: R Foundations'
-author: "(d) Data Frames and Tibbles"
+title: '4. R Foundations'
+author: "Data Frames and Tibbles"
 output:
   beamer_presentation: default
   ioslides_presentation: default
