@@ -13,7 +13,7 @@ generate insights, and communicate these to key stakeholders.
 
 Participants should setup an account on [RStudio Cloud](https://rstudio.cloud), and then download this github site when setting up a project.
 
-<center>**Outline Agenda**</center>
+<center><b>Outline Agenda</b></center>
 <br>
 
 |Topic Number| Title| Description |
