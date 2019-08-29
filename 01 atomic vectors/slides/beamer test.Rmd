@@ -1,6 +1,6 @@
 ---
 title: '1. R Foundations - Atomic Vectors'
-author: "Data Science for OR - J. Duggan"
+author: "Jim Duggan 2019"
 output:
   beamer_presentation:
     theme: "CambridgeUS"
@@ -14,14 +14,13 @@ library(ggplot2)
 ```
 
 
-
 ## R
 
 - R’s mission is to enable the best and most thorough exploration of data possible (Chambers 2008). 
 - It is a dialect of the S language, developed at Bell Laboratories
 - ACM noted that S “will forever alter the way people analyze, visualize, and manipulate data” 
 
-  ```{r,echo=T}
+```{r,echo=T}
 v <- 1:10
 v
 summary(v)
@@ -275,10 +274,23 @@ x[!is.na(x)] # Exclude all NAs from result
 
 
 
-## Test Slide with Plot
+## Summary
+- This is the first point...
+- This is the first point...
+- This is the first point...
+- This is the first point...
+- This is the first point...
+- This is the first point...
+- This is the first point...
+- This is the first point...
+- This is the first point...
+- This is the first point...
 
-```{r,echo=F}
-plot(faithful)
+```{r,echo=F,fig.width=2, fig.height=2}
+plot(1:10,axes=FALSE)
 ```
+
+  
+
 
 

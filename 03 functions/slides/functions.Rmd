@@ -1,11 +1,11 @@
 ---
-title: '3. R Foundations'
-author: "Functions"
+title: '2. R Foundations - Functions'
+author: "Data Science for OR - J. Duggan"
 output:
-  beamer_presentation: default
-  ioslides_presentation: default
-  incremental : true
-  widescreen: yes
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "dolphin"
+    fonttheme: "structurebold"
 ---
 
 ```{r setup, include=FALSE}
@@ -146,7 +146,7 @@ g()
 - Create a container for output
 - Apply f() to each component of the list
 - Fill the container with the results
-```{r, echo=F,out.width='80%',fig.cap='Common Pattern for Functionals'}
+```{r, echo=F,out.width='50%'}
  knitr::include_graphics("images/07 Apply.png")
 ```
 

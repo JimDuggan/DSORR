@@ -1,10 +1,11 @@
 ---
-title: '4. R Foundations'
-author: "Data Frames and Tibbles"
+title: '4. R Foundations - Data Frames'
+author: "Data Science for OR - J. Duggan"
 output:
-  beamer_presentation: default
-  ioslides_presentation: default
-  widescreen: yes
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "dolphin"
+    fonttheme: "structurebold"
 ---
 
 ```{r setup, include=FALSE}
