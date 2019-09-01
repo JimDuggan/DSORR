@@ -179,9 +179,20 @@ apply(m,2,sum) # sum the columns
   
 
 
-## Test Slide with Plot
+## Summary
+- Functions are a fundamental building block of R
+- Functions:
+  + are declared using the function reserved word 
+  + are objects
+- Functions can access variables within the environment where they are created
+- Functionals are functions that takes a function as an input and returns a vector as output (can be used as a looping structure)
+- The apply family in R are functionals (**apply**, **sapply**, **lapply**)
+- The package **purrr** is now being used instead of **apply**
 
-```{r}
-plot(pressure)
+```{r,echo=F,fig.width=2, fig.height=2}
+# this is a hack to call plot but make the plot tiny
+plot(1:1,axes=FALSE,xlab = "", ylab="",cex = .001)
 ```
+
+
 

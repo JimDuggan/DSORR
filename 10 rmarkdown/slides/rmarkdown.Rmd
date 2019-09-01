@@ -1,11 +1,13 @@
 ---
-title: '10. R Markdown'
-author: "Communicating Results"
+title: '10. R Markdown - Communicating Results'
+author: "Data Science for OR - J. Duggan"
 output:
-  beamer_presentation: default
-  ioslides_presentation: default
-  widescreen: yes
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "dolphin"
+    fonttheme: "structurebold"
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -40,13 +42,13 @@ library(ggplot2)
 
 ## "knit" to HTML
 
-```{r, echo=F,out.width='80%'}
+```{r, echo=F,out.width='60%'}
  knitr::include_graphics("images/03 Example.png")
 ```
 
 ## "knit" to PDF
 
-```{r, echo=F,out.width='80%'}
+```{r, echo=F,out.width='60%'}
  knitr::include_graphics("images/04 Example.png")
 ```
 
@@ -91,7 +93,7 @@ This table summarizes what types of output each option suppresses…
 
 ## Sample Output
 
-```{r, echo=F,out.width='100%'}
+```{r, echo=F,out.width='90%'}
  knitr::include_graphics("images/08 ParameterTest.png")
 ```
 
@@ -107,10 +109,18 @@ This table summarizes what types of output each option suppresses…
 
 
 
-## Test Slide with Plot
+## Summary
+- R Markdown provides a unified authoring framework for data science, combining:
+  + your code, 
+  + results 
+  + prose commentary
+- R Markdown documents are fully reproducible and support many output formats (pdfs, slideshows, and more).
+- See also **R Presentation** format for slide generation
 
-```{r,echo=F}
-plot(faithful)
+
+```{r,echo=F,fig.width=2, fig.height=2}
+# this is a hack to call plot but make the plot tiny
+plot(1:1,axes=FALSE,xlab = "", ylab="",cex = .001)
 ```
 
 

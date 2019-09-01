@@ -1,11 +1,13 @@
 ---
-title: '9. Linking Data and Linear Modelling'
-author: "An Energy Case Study"
+title: '9. An Energy Generation Case Study'
+author: "Data Science for OR - J. Duggan"
 output:
-  beamer_presentation: default
-  ioslides_presentation: default
-  widescreen: yes
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "dolphin"
+    fonttheme: "structurebold"
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -24,13 +26,13 @@ library(lubridate)
 
 ## Generation Information
 
-```{r, echo=F,out.width='100%',fig.cap='Generation Information'}
+```{r, echo=F,out.width='90%'}
  knitr::include_graphics("images/02 Gen Info.png")
 ```
 
 ## Sample Data
 
-```{r, echo=F,out.width='100%',fig.cap='Generation Information'}
+```{r, echo=F,out.width='90%'}
  knitr::include_graphics("images/03 Generation Data.png")
 ```
 
@@ -42,7 +44,7 @@ glimpse(ener)
 ```
 
 ## Processing Dates - lubridate
-```{r, echo=F,out.width='75%'}
+```{r, echo=F,out.width='60%'}
  knitr::include_graphics("images/04 lubridate.png")
 ```
 
@@ -74,15 +76,15 @@ glimpse(ener)
 
 ## Plot time series
 
-```{r,echo=T,fig.width=5, fig.height=3}
+```{r,echo=T,fig.width=5, fig.height=2.5}
 ggplot(data = ener,aes(x=DateTime, y=Generation)) +  
   geom_line() + xlab("Date") + ylab("Generation") +
   ggtitle("Monthly Generation Data")
 ```
 
-## Value for 1/2/2017
+## Extract value for 1/2/2017
 
-```{r,echo=T,fig.width=5, fig.height=2.75}
+```{r,echo=T,fig.width=5, fig.height=2}
 ggplot(data = filter(ener,Date=="2017-02-01"),
        aes(x=DateTime, y=Generation)) +  
   geom_line() + xlab("Date") + ylab("Generation") +
@@ -91,7 +93,7 @@ ggplot(data = filter(ener,Date=="2017-02-01"),
 
 ## Wind Generation v CO2 Emissions
 
-```{r,echo=T,fig.width=5, fig.height=2.75}
+```{r,echo=T,fig.width=5, fig.height=2.55}
 ggplot(data = ener) +  
   geom_point(aes(x=Wind,y=CO2,colour=DayOfWeek))+
   xlab("Wind Generation") + ylab("CO2 Emissions")
@@ -148,14 +150,14 @@ slice(join_t,1:7)
 ```
 
 ## Plot Avr Wind Speed v Avr Wind Generation
-```{r,echo=T,fig.width=5, fig.height=2.75}
+```{r,echo=T,fig.width=5, fig.height=2.55}
 ggplot(data = join_t) +  
   geom_point(aes(x=AVRWind,y=AvrWindGeneration))+
   xlab("Average Wind Speed") + ylab("Average Generation")
 ```
 
 ## Visualise Linear Model
-```{r,echo=T,fig.width=5, fig.height=2.75}
+```{r,echo=T,fig.width=5, fig.height=2.55}
 ggplot(data = join_t,
        aes(x=AVRWind,y=AvrWindGeneration)) +  
   geom_point()+xlab("Average Wind Speed") + ylab("Average Generation")+
@@ -170,10 +172,9 @@ mod
 
 ## Predicting Values
 ```{r,echo=T,fig.width=3, fig.height=1.5}
-ggplot(data = join_t,
-       aes(x=AVRWind,y=AvrWindGeneration)) +  
-  geom_point()+xlab("Average Wind Speed") + ylab("Average Generation")+
-  geom_smooth(method="lm")
+ggplot(data = join_t,aes(x=AVRWind,y=AvrWindGeneration)) +  
+  geom_point()+xlab("Average Wind Speed") + 
+  ylab("Average Generation")+geom_smooth(method="lm")
 
 predict(mod, newdata = data.frame(AVRWind=25))
 ```
@@ -188,18 +189,23 @@ slice(adv,1:8)
 
 ## Visualise Relationship
 
-```{r,echo=T,fig.width=6, fig.height=3.5}
+```{r,echo=T,fig.width=6, fig.height=3}
 ggplot(data = adv,
        aes(x=TV,y=Sales)) +  
   geom_point()+geom_smooth(method="lm")
 
 ```
 
-## Test Slide with Plot
+## Summary
+- Shows use of **dplyr**, **ggplot2** and **lm**
+- Linking data to explore relationships
+- Building a simple linear model
+- Predicting future values
 
-```{r}
-plot(faithful)
+
+```{r,echo=F,fig.width=2, fig.height=2}
+# this is a hack to call plot but make the plot tiny
+plot(1:1,axes=FALSE,xlab = "", ylab="",cex = .001)
 ```
-
 
 

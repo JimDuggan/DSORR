@@ -1,10 +1,11 @@
 ---
-title: '5. Exploratory Data Analysis'
-author: "Visualisation using ggplot2"
+title: '5. Exploratory Data Analysis - ggplot2'
+author: "Data Science for OR - J. Duggan"
 output:
-  beamer_presentation: default
-  ioslides_presentation: default
-  widescreen: yes
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "dolphin"
+    fonttheme: "structurebold"
 ---
 
 ```{r setup, include=FALSE}
@@ -57,7 +58,7 @@ Generate a first graph to help answer the following question
 
 ## Plotting with ggplot2
 
-```{r,echo=T,fig.width=5, fig.height=3}
+```{r,echo=T,fig.width=5, fig.height=2.5}
 ggplot(data = d) +   # specify the source tibble
   geom_point(mapping=aes(x=displ,  # map x, y vars
                          y=hwy))
@@ -65,7 +66,7 @@ ggplot(data = d) +   # specify the source tibble
 
 ## Adding a linear model
 
-```{r,echo=T,fig.width=5, fig.height=3}
+```{r,echo=T,fig.width=5, fig.height=2.5}
 ggplot(data = d,aes(x=displ, y=hwy)) +  
   geom_point() +
   geom_smooth(method = "lm")
@@ -75,7 +76,7 @@ ggplot(data = d,aes(x=displ, y=hwy)) +
 - The plot shows a negative relationship between engine size (displ) and fuel efficiency (hwy)
 - Cars with big engines use more fuel
 - Does this confirm or refute your hypothesis about fuel efficiency and engine size?
-```{r,echo=F,fig.width=4, fig.height=2.5}
+```{r,echo=F,fig.width=4, fig.height=2.1}
 ggplot(data = d,aes(x=displ, y=hwy)) +  
   geom_point() +
   geom_smooth(method = "lm")
@@ -103,7 +104,7 @@ unique(d$class)
 ```
 
 ## In ggplot2 - Adding the third variable
-```{r,echo=T,fig.width=7, fig.height=4}
+```{r,echo=T,fig.width=5, fig.height=2.5}
 ggplot(data=d)+
   geom_point(aes(x=displ,y=hwy,colour=class))
 ```
@@ -114,21 +115,21 @@ ggplot(data=d)+
 - To facet on the combination of two variables, used facet_grid()
 
 ## Facet Example 1
-```{r,echo=T,fig.width=7, fig.height=4}
+```{r,echo=T,fig.width=4.5, fig.height=2.5}
 ggplot(data=d)+
   geom_point(aes(x=displ,y=hwy))+
   facet_wrap(~class)
 ```
 
 ## Facet Example 2
-```{r,echo=T,fig.width=7, fig.height=4}
+```{r,echo=T,fig.width=4.5, fig.height=2.5}
 ggplot(data=d)+
   geom_point(aes(x=displ,y=hwy,colour=class))+
   facet_wrap(~manufacturer)
 ```
 
 ## Facet Grid Example
-```{r,echo=T,fig.width=7, fig.height=4}
+```{r,echo=T,fig.width=4.5, fig.height=2.5}
 ggplot(data=d)+
   geom_point(aes(x=displ,y=hwy))+
   facet_grid(drv~cyl)
@@ -140,13 +141,13 @@ ggplot(data=d)+
 - To change the geom in your plot, simply change the geom function that is added to the ggplot call.
 
 ## Same data - geom 1
-```{r,echo=T,fig.width=7, fig.height=4}
+```{r,echo=T,fig.width=4.5, fig.height=2.5}
 ggplot(data=d)+
   geom_smooth(aes(x=displ,y=hwy))
 ```
 
 ## Same data - geom 2
-```{r,echo=T,fig.width=7, fig.height=4}
+```{r,echo=T,fig.width=4.5, fig.height=2.5}
 ggplot(data=d)+
   geom_point(aes(x=displ,y=hwy))
 ```
@@ -163,9 +164,7 @@ ggplot(data=d,aes(x=displ,y=hwy,colour=class))+
 
 
 ## Sample plot geoms
-.
-
-```{r, echo=F,out.width='100%',fig.cap='Sample geoms'}
+```{r, echo=F,out.width='90%'}
  knitr::include_graphics("images/02 Geoms.png")
 ```
 
@@ -182,13 +181,13 @@ knitr::kable(
 
 ## Explanation of Variables
 
-```{r, echo=F,out.width='100%',fig.cap='Diamonds attributes'}
+```{r, echo=F,out.width='100%'}
  knitr::include_graphics("images/03 Diamonds.png")
 ```
 
 
 ## Diamonds summary
-```{r, echo=F,out.width='100%',fig.cap='Data set summary'}
+```{r, echo=F,out.width='100%'}
  knitr::include_graphics("images/04 Summary.png")
 ```
 
@@ -202,28 +201,28 @@ knitr::kable(
 
 ## Bar Chart
 
-```{r,echo=T,fig.width=7, fig.height=5}
+```{r,echo=T,fig.width=4.5, fig.height=2.5}
 ggplot(data=diamonds)+
   geom_bar(aes(x=cut))
 ```
 
 ## Bar Chart: Adding information with fill
 
-```{r,echo=T,fig.width=7, fig.height=5}
+```{r,echo=T,fig.width=4.5, fig.height=2.5}
 ggplot(data=diamonds)+
   geom_bar(aes(x=cut,fill=clarity))
 ```
 
 ## Bar Chart: Normalising Plot
 
-```{r,echo=T,fig.width=7, fig.height=5}
+```{r,echo=T,fig.width=4.5, fig.height=2.5}
 ggplot(data=diamonds)+
   geom_bar(aes(x=cut,fill=clarity),position="fill")
 ```
 
 ## Bar Chart: side-by-side
 
-```{r,echo=T,fig.width=7, fig.height=5}
+```{r,echo=T,fig.width=4.5, fig.height=2.5}
 ggplot(data=diamonds)+
   geom_bar(aes(x=cut,fill=clarity),position="dodge")
 ```
@@ -237,7 +236,7 @@ ggplot(data=diamonds)+
 
 ## Using jitter
 
-```{r,echo=T,fig.width=6, fig.height=4}
+```{r,echo=T,fig.width=4.5, fig.height=2.5}
 ggplot(data=mpg)+
   geom_point(aes(x=displ,y=hwy),
            colour="blue", position="jitter")
@@ -245,7 +244,7 @@ ggplot(data=mpg)+
 
 ## Histogram
 
-```{r,echo=T,fig.width=6, fig.height=4}
+```{r,echo=T,fig.width=5, fig.height=2.5}
 ggplot(data=diamonds,aes(x=price))+
   geom_histogram(binwidth = 500)
 ```
@@ -260,27 +259,24 @@ ggplot(data=diamonds,aes(x=price))+
 
 ## Boxplot Example
 
-```{r,echo=T,fig.width=6, fig.height=4}
+```{r,echo=T,fig.width=5.5, fig.height=3}
 ggplot(data=mpg,aes(x=class,y=hwy))+
   geom_boxplot()
 ```
 
 ## Summary
-<div class="columns-2">
 - The ggplot2 approach can be summarised by a template
 - It can take seven parameters, but usually not all need to be applied (defaults used)
-- These seven parameters compose the grammar of graphics
+- These seven parameters comprise the **grammar of graphics**
 
-```{r, echo=F,out.width='50%',fig.cap='Layered Grammar of Graphics'}
+```{r, echo=F,out.width='50%'}
  knitr::include_graphics("images/05 Layered.png")
 ```
 
-</div>
-
-## Test Slide with Plot
-
-```{r}
-plot(faithful)
+```{r,echo=F,fig.width=2, fig.height=2}
+# this is a hack to call plot but make the plot tiny
+plot(1:1,axes=FALSE,xlab = "", ylab="",cex = .001)
 ```
+
 
 

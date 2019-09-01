@@ -275,10 +275,17 @@ x[!is.na(x)] # Exclude all NAs from result
 
 
 
-## Test Slide with Plot
+## Summary
+- Atomic vectors, key type in R
+- All elements are the same type (coercion)
+- Different ways to filter, including logical vectors
+- is.na() to check for symbol NA (not available)
+- Vectors support vectorised operations. e.g., **sqrt(1:10)**
 
-```{r,echo=F}
-plot(faithful)
+
+```{r,echo=F,fig.width=2, fig.height=2}
+# this is a hack to call plot but make the plot tiny
+plot(1:1,axes=FALSE,xlab = "", ylab="",cex = .001)
 ```
 
 

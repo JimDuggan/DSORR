@@ -180,9 +180,14 @@ sloop::otype(mod)
 class(mod)
 ```
 
-## Test Slide with Plot
+## Summary
+- Data frames/tibbles are the most common way of storing heterogeneous data in R
+- Under the hood, a data frame is a list of equal-length vectors, and shares properties of both a list and a matrix
+- Key for processing rectangular data, ideally in "tidy" format (every row is an observation, every column a variable)
 
-```{r}
-plot(faithful)
+```{r,echo=F,fig.width=2, fig.height=2}
+# this is a hack to call plot but make the plot tiny
+plot(1:1,axes=FALSE,xlab = "", ylab="",cex = .001)
 ```
+
 

@@ -1,11 +1,13 @@
 ---
-title: "8. Preparing Data for Analysis"
-author: "The tidyr Package"
+title: '8. Preparing Data for Analysis - tidyr'
+author: "Data Science for OR - J. Duggan"
 output:
-  beamer_presentation: default
-  ioslides_presentation: default
-  widescreen: yes
+  beamer_presentation:
+    theme: "CambridgeUS"
+    colortheme: "dolphin"
+    fonttheme: "structurebold"
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -31,7 +33,7 @@ library(tidyr)
 
 ## A Typical Presentation Data Set (Wickham 2014)
 
-```{r, echo=F,out.width='100%',fig.cap='Sample Medical Trial Data'}
+```{r, echo=F,out.width='100%'}
  knitr::include_graphics("images/02 Untidy.png")
 ```
 
@@ -50,14 +52,14 @@ untidy
 - Each observation must have its own row
 - Each value must have its own cell
 
-```{r, echo=F,out.width='100%',fig.cap='Rules for Tidy Data'}
+```{r, echo=F,out.width='100%'}
  knitr::include_graphics("images/04 Tidy Rules.png")
 ```
 
 ## Problems with the data set
-- Person (John, Jane, and Mary)
-- Treatments (treatmenta or treatmentb)
-- 6 observations
+- Treatment types (treatmenta or treatmentb) are column names
+- Good for presentation, not for automated analysis
+- There are 6 observations, and three variables (Person, Treatment, Outcome)
 
 ```{r, echo=T}
 untidy
@@ -65,7 +67,7 @@ untidy
 
 ## The Goal
 
-```{r, echo=F,out.width='75%',fig.cap='Target Transformation'}
+```{r, echo=F,out.width='60%'}
  knitr::include_graphics("images/05 Goal.png")
 ```
 
@@ -78,20 +80,20 @@ untidy
 
 ## The Gather Process
 
-```{r, echo=F,out.width='100%',fig.cap='The gather process'}
+```{r, echo=F,out.width='100%'}
  knitr::include_graphics("images/06 Gather.png")
 ```
 
 ## Function Call
 
-```{r, echo=F,out.width='100%',fig.cap='Calling gather()'}
+```{r, echo=F,out.width='100%'}
  knitr::include_graphics("images/07 Gather Code.png")
 ```
 
 ## Challenge 3.2
 Convert the following data to tidy data format. Process the resulting data using ggplot2 and dplyr.
 
-```{r, echo=F,out.width='100%',fig.cap='Tidy Data Challenge'}
+```{r, echo=F,out.width='100%'}
  knitr::include_graphics("images/08 Challenge.png")
 ```
 
@@ -103,7 +105,7 @@ Convert the following data to tidy data format. Process the resulting data using
 
 ## Example using tidyr::table3
 
-```{r, echo=F,out.width='100%',fig.cap='Example of separate()'}
+```{r, echo=F,out.width='100%'}
  knitr::include_graphics("images/09 Separate.png")
 ```
 
@@ -136,11 +138,17 @@ table3new
 unite(table3new,"rate", c("cases","population"),
       sep = "/")
 ```
+## Summary
+- Tidy Data
+  + every row is an obervations
+  + Every column a variable
+- **tidyr** provides tools to reshape data
+- **dplyr** and **ggplot2** operate on tidy data 
 
-## Test Slide with Plot
-
-```{r}
-plot(faithful)
+```{r,echo=F,fig.width=2, fig.height=2}
+# this is a hack to call plot but make the plot tiny
+plot(1:1,axes=FALSE,xlab = "", ylab="",cex = .001)
 ```
+
 
 

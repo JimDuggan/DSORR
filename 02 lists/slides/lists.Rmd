@@ -102,6 +102,15 @@ coefficients(mod)
 str(coefficients(mod))
 ``` 
 
+## Summary
+- Lists are vectors, but can store many different types
+- [] returns a subset of a list (as a list), 
+- [[]] returns the list contents
+- The function **unlist()** will convert a list to an atomic vector
+- The tag ($) operator is very useful (and used in data frames)
+- In regression (and other machine learning algorithms in R), result information is returned as a list
+
+
 
 
 
