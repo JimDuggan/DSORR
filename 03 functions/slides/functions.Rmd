@@ -1,5 +1,5 @@
 ---
-title: '2. R Foundations - Functions'
+title: '3. R Foundations - Functions'
 author: "Data Science for OR - J. Duggan"
 output:
   beamer_presentation:
