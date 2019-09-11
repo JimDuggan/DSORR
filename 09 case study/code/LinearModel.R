@@ -5,7 +5,6 @@ library(lubridate)
 library(readxl)
 
 
-
 ener <- read_excel("datasets/energy/IrelandData January 2017.xlsx")
 
 ener <- mutate(ener, DateTime    =  ymd_hms(DateTime),

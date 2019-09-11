@@ -3,6 +3,6 @@ library(ggplot2)
 
 # http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets
 
-orig_list <- data.frame(readxl::read_excel("datasets/Titanic/titanic3_assignment.xls"))
+orig_list <- readxl::read_excel("datasets/Titanic/titanic3.xls")
 plist     <- orig_list
 
